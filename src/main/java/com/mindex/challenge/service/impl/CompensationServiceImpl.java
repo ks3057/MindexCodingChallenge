@@ -24,24 +24,26 @@ public class CompensationServiceImpl implements CompensationService {
     @Override
     public Compensation create(Compensation compensation) {
         String employeeId = compensation.getEmployee().getEmployeeId();
+        LOG.debug("Creating compensation for employee with id [{}]", employeeId);
+
         Employee employee = employeeService.read(employeeId);
-        //get the updated employee from database
+        //insert the updated employee from database
         if (employee == null) {
             throw new RuntimeException("Invalid employeeId: " + employeeId);
         }
 
         compensation.setEmployee(employee);
         compensationRepository.insert(compensation);
-        LOG.info("Compensation created for employeeId: {}", compensationRepository.findCompensationByEmployeeEmployeeId(employeeId));
         return compensation;
     }
 
     @Override
     public Compensation read(String id) {
+        LOG.debug("Reading compensation for employee with id [{}]", id);
         Compensation compensation = compensationRepository.findCompensationByEmployeeEmployeeId(id);
 
         if (compensation == null) {
-            throw new RuntimeException("Invalid employeeId: " + id);
+            throw new RuntimeException("Compensation for employeeId: " + id + " does not exist");
         }
 
         return compensation;

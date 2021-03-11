@@ -28,6 +28,7 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
         queue.add(employee);
         int directReports = 0;
 
+        //assuming there is no cycle in the tree
         while (!queue.isEmpty()) {
             int size = queue.size();
             directReports += size;
