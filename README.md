@@ -84,3 +84,57 @@ Compensation from the persistence layer.
 
 ## Delivery
 Please upload your results to a publicly accessible Git repo. Free ones are provided by Github and Bitbucket.
+
+## Results
+### Endpoints added
+The following endpoints are available to use:
+```
+* CREATE
+    * HTTP Method: POST 
+    * URL: localhost:8080/compensation
+    * PAYLOAD: Compensation
+    * RESPONSE: Compensation
+* READ
+    * HTTP Method: GET 
+    * URL: localhost:8080/compensation/{id}
+    * RESPONSE: Compensation
+* READ
+    * HTTP Method: GET 
+    * URL: localhost:8080/reportingstructure/{id}
+    * RESPONSE: ReportingStructure
+```
+
+Compensation has a JSON schema of:
+```json
+{
+  "type":"Compensation",
+  "properties": {
+    "employee": {
+      "type": "Employee"
+    },
+    "salary": {
+      "type": "int"
+    },
+    "effectiveDate": {
+          "type": "date"
+    }
+  }
+}
+```
+
+ReportingStructure has a JSON schema of:
+```json
+{
+  "type":"ReportingStructure",
+  "properties": {
+    "employee": {
+      "type": "Employee"
+    },
+    "numberOfReports": {
+      "type": "int"
+    }
+  }
+}
+```
+
+For all endpoints that require an "id" in the URL, this is the "employeeId" field.
