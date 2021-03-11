@@ -32,11 +32,18 @@ public class CompensationServiceImpl implements CompensationService {
 
         compensation.setEmployee(employee);
         compensationRepository.insert(compensation);
+        LOG.info("Compensation created for employeeId: {}", compensationRepository.findCompensationByEmployeeEmployeeId(employeeId));
         return compensation;
     }
 
     @Override
     public Compensation read(String id) {
-        return null;
+        Compensation compensation = compensationRepository.findCompensationByEmployeeEmployeeId(id);
+
+        if (compensation == null) {
+            throw new RuntimeException("Invalid employeeId: " + id);
+        }
+
+        return compensation;
     }
 }

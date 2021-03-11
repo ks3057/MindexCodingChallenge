@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompensationRepository extends MongoRepository<Compensation, String> {
-    Compensation findCompensationByEmployee(String id);
+    Compensation findCompensationByEmployeeEmployeeId(String id);
 }
