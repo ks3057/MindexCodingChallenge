@@ -32,9 +32,13 @@ public class ReportingStructureServiceImpl implements ReportingStructureService 
             int size = queue.size();
             directReports += size;
             for (int i = 0; i < size; i++) {
-                Employee e = queue.poll();
-                if (e != null) {
-                    List<Employee> reports = e.getDirectReports();
+                Employee manager = queue.poll();
+                if (manager != null) {
+                    //need to fetch the employee from the database again as getDirectReports returns list of employee
+                    // ids with other fields set to null
+                    Employee emp = employeeRepository.findByEmployeeId(manager.getEmployeeId());
+                    List<Employee> reports = emp.getDirectReports();
+
                     if (reports != null) {
                         queue.addAll(reports);
                     }
